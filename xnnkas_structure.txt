@@ -1,0 +1,23 @@
+xnnkas/
+├── README.md
+├── LICENSE
+├── .gitignore
+├── requirements.txt
+├── environment.yml
+├── setup.py
+├── data/
+│   ├── raw/
+│   ├── processed/
+│   └── external/
+├── notebooks/
+├── src/
+│   └── xnnkas/
+│       ├── __init__.py
+│       ├── training.py
+│       ├── process.py
+│       ├── LaueTools/       <- External scripts from LaueTools package
+│       ├── models/          <- Model definitions
+│       ├── utils/           <- Utility functions
+│       └── mask/            <- Mask related code
+├── tests/
+└── docs/

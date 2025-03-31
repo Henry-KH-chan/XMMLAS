@@ -1,0 +1,29 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Build directories
+build/
+dist/
+
+# Distribution packaging
+*.egg-info/
+.eggs/
+
+# Virtual environments (adjust as needed; here we ignore any folder named "venv", "env", or "test_env")
+venv/
+env/
+test_env/
+*.env
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Local environment configuration
+environment.yaml
+
+# Log files
+pip-log.txt
+pip-delete-this-directory.txt

@@ -2,7 +2,7 @@
 
 ## Overview
 
-**XMMKAS** is a lightweight machine learning tool designed to analyze Laue patterns from X-ray microdiffraction experiments. Built on top of [LaueTools](https://pypi.org/project/LaueTools/) and [lauetoolsnn](https://pypi.org/project/lauetoolsnn/), XNNKAS uses a simple neural network to efficiently solve Laue patterns. The project is optimized for faster training by employing a single-layer neural network implemented via matrix multiplication, significantly speeding up both training and convergence. Additionally, the indexing procedure is enhanced by leveraging the intensity of the peaks—ranking and iteratively feeding them to the network until successful indexing is achieved.
+**XMMKAS** is a lightweight machine learning tool designed to analyze Laue patterns from X-ray microdiffraction experiments. Built on top of [LaueTools](https://pypi.org/project/LaueTools/) and [lauetoolsnn](https://pypi.org/project/lauetoolsnn/), XMMKAS uses a simple neural network to efficiently solve Laue patterns. The project is optimized for faster training by employing a single-layer neural network implemented via matrix multiplication, significantly speeding up both training and convergence. Additionally, the indexing procedure is enhanced by leveraging the intensity of the peaks—ranking and iteratively feeding them to the network until successful indexing is achieved.
 
 ## Intended Audience
 
@@ -58,7 +58,7 @@ For training functionality (using `training.py`), TensorFlow is required. It is 
 Alternatively, you can create a conda environment using the provided `environment.yaml` file. Save the following content as `environment.yaml`:
 
 ```yaml
-name: xnnkas_env
+name: xmmkas_env
 channels:
   - conda-forge
   - defaults
@@ -80,7 +80,7 @@ dependencies:
 To create and activate the environment, run:
 ```bash
 conda env create -f environment.yaml 
-conda activate xnnkas_env
+conda activate xmmkas_env
 ```
 
 ### Usage
@@ -90,7 +90,7 @@ Put your images inside the folder data and change the directory inside the scrip
 
 To process images, run:
 ```bash
-python src/xnnkas/process_laue.py
+python src/xmmkas/process_laue.py
 ```
 Processed results—such as orientation matrices and additional details will be saved in the data/processed/ directory.
 
@@ -99,7 +99,7 @@ The training.py script trains the neural network using generated overlap histogr
 
 To train the model, change the parameter inside the scripts and run:
 ```bash
-python src/xnnkas/training.py
+python src/xmmkas/training.py
 ```
 
 ### License
@@ -109,7 +109,7 @@ This project is licensed under the [MIT License](https://mit-license.org/).
 Contributions are welcome! Please open an issue or submit a pull request for any bug fixes, improvements, or suggestions. For detailed guidelines, refer to the CONTRIBUTING.md file.
 
 ### Contact
-For questions or support, please contact me at [email](tkp203059@gmail.com) or open an issue on GitHub.
+For questions or support, please contact me at [email](mailto:tkp203059@gmail.com) or open an issue on GitHub.
 
 ### Acknowledgements
 [LaueTools](https://pypi.org/project/LaueTools/)

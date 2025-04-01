@@ -1,0 +1,17 @@
+name: xmmkas_env
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - numpy
+  - tifffile
+  - scipy
+  - scikit-image
+  - matplotlib
+  - h5py
+  # Uncomment one of the following lines for training functionality:
+  # For GPU support (requires appropriate CUDA/cuDNN installation):
+  # - tensorflow-gpu=2.10.0
+  # For CPU-only training:
+  # - tensorflow=2.10.0

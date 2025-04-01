@@ -7,14 +7,14 @@ this_directory = os.path.abspath(os.path.dirname(__file__))
 #     long_description = f.read()
 
 setuptools.setup(
-    name="xmmkas",
+    name="xmmlas",
     version="1.0.0",
     author="Ka Hung CHAN",
     author_email="tkp203059@gmail.com",
     description="X-ray microdiffraction machine learning analysis software",
     # long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/Henry-KH-chan/XMMLAS",
+    url="https://github.com/Henry-KH-chan/xmmlas",
     package_dir={"": "src"},
     packages=setuptools.find_packages(where="src"),
     classifiers=[

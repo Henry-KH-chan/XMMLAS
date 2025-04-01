@@ -1,8 +1,8 @@
-# XMMKAS: X-ray Microdiffraction Machine Learning Analysis Software
+# XMMLAS: X-ray Microdiffraction Machine Learning Analysis Software
 
 ## Overview
 
-**XMMKAS** is a lightweight machine learning tool designed to analyze Laue patterns from X-ray microdiffraction experiments. Built on top of [LaueTools](https://pypi.org/project/LaueTools/) and [lauetoolsnn](https://pypi.org/project/lauetoolsnn/), XMMKAS uses a simple neural network to efficiently solve Laue patterns. The project is optimized for faster training by employing a single-layer neural network implemented via matrix multiplication, significantly speeding up both training and convergence. Additionally, the indexing procedure is enhanced by leveraging the intensity of the peaks—ranking and iteratively feeding them to the network until successful indexing is achieved.
+**XMMLAS** is a lightweight machine learning tool designed to analyze Laue patterns from X-ray microdiffraction experiments. Built on top of [LaueTools](https://pypi.org/project/LaueTools/) and [lauetoolsnn](https://pypi.org/project/lauetoolsnn/), XMMLAS uses a simple neural network to efficiently solve Laue patterns. The project is optimized for faster training by employing a single-layer neural network implemented via matrix multiplication, significantly speeding up both training and convergence. Additionally, the indexing procedure is enhanced by leveraging the intensity of the peaks—ranking and iteratively feeding them to the network until successful indexing is achieved.
 
 ## Intended Audience
 
@@ -58,7 +58,7 @@ For training functionality (using `training.py`), TensorFlow is required. It is 
 Alternatively, you can create a conda environment using the provided `environment.yaml` file. Save the following content as `environment.yaml`:
 
 ```yaml
-name: xmmkas_env
+name: xmmlas_env
 channels:
   - conda-forge
   - defaults
@@ -80,7 +80,7 @@ dependencies:
 To create and activate the environment, run:
 ```bash
 conda env create -f environment.yaml 
-conda activate xmmkas_env
+conda activate xmmlas_env
 ```
 
 ### Usage
@@ -90,7 +90,7 @@ Put your images inside the folder data and change the directory inside the scrip
 
 To process images, run:
 ```bash
-python src/xmmkas/process_laue.py
+python src/xmmlas/process_laue.py
 ```
 Processed results—such as orientation matrices and additional details will be saved in the data/processed/ directory.
 
@@ -99,7 +99,7 @@ The training.py script trains the neural network using generated overlap histogr
 
 To train the model, change the parameter inside the scripts and run:
 ```bash
-python src/xmmkas/training.py
+python src/xmmlas/training.py
 ```
 
 ### License

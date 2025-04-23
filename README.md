@@ -118,4 +118,6 @@ For questions or support, please contact me at [email](mailto:tkp203059@gmail.co
 
 The ALS Advanced Light Source micro focus beamline 12.3.2 team (Dr. Nobumichi Tamura) for their experimental support.
 
+This research used resources of the Advanced Light Source, which is a DOE Office of Science User Facility under contract no. DE-AC02-05CH11231. K. H. C. was supported in part by an ALS Doctoral Fellowship in Residence.
+
 

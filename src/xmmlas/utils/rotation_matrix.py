@@ -75,28 +75,53 @@ def convert_angle_to_direction(twotheta_deg_chi_deg):
     return np.array([x, y, z])
 
 
-def convert_direction_to_angle(xyz):
+def convert_direction_to_angle(direction_vectors):
     """
-    Convert a 3D direction vector to (two theta, chi) angles in degrees.
-    
+    Converts 3D Cartesian direction vectors to (2theta, chi) angles in degrees.
+    Assumes direction_vectors is a (3, N) NumPy array where each column is a unit vector [x, y, z].
+
+    NOTE: This function uses the specific coordinate system convention defined by:
+    x = -sin(theta)
+    y = cos(theta) * sin(chi)
+    z = cos(theta) * cos(chi)
+    where theta = 2theta / 2.
+
     Args:
-        xyz (array-like): 3D vector (x, y, z).
-    
+        direction_vectors (numpy.ndarray): A (3, N) NumPy array of 3D direction vectors.
+                                           If a single vector (3,), it will be converted to (3, 1).
+
     Returns:
-        np.array: Array containing [two theta, chi] in degrees.
+        numpy.ndarray: A (N, 2) NumPy array where each row is a (2theta_deg, chi_deg) pair.
     """
-    xyz = normalize(np.array(xyz))
-    x = xyz.T[0]
-    y = xyz.T[1]
-    z = xyz.T[2]
+    # Ensure input is (3, N)
+    if direction_vectors.ndim == 1:
+        direction_vectors = direction_vectors[:, np.newaxis] # Convert (3,) to (3, 1)
+
+    # Normalize vectors to ensure they are unit vectors
+    norms = np.linalg.norm(direction_vectors, axis=0)
+    # Handle cases where norm is zero to avoid division by zero; these points will result in NaN angles.
+    # We set norm to 1 for zero vectors so division doesn't error, but resulting angles will be NaN.
+    norms[norms == 0] = 1.0 
     
-    theta_rad = np.arcsin(-x)
-    chi_rad = np.arctan(y / z)
+    x = direction_vectors[0, :] / norms
+    y = direction_vectors[1, :] / norms
+    z = direction_vectors[2, :] / norms
+
+    # Calculate theta_rad (angle from the axis where x=-sin(theta))
+    # Numerator: -x
+    # Denominator: sqrt(y^2 + z^2) - this is the projection onto the YZ plane
+    theta_rad = np.arctan2(-x, np.sqrt(y**2 + z**2))
     
-    theta_deg = theta_rad * DEG
-    chi_deg = chi_rad * DEG
-        
-    return np.array([theta_deg * 2, chi_deg])  # two theta is twice theta
+    # Calculate chi_rad (azimuthal angle in the YZ plane from Z towards Y)
+    # This is based on the y = cos(theta)*sin(chi) and z = cos(theta)*cos(chi)
+    chi_rad = np.arctan2(y, z)
+
+    # Convert radians to degrees
+    two_theta_deg = np.degrees(theta_rad * 2.0)
+    chi_deg = np.degrees(chi_rad)
+
+    # Combine into a (N, 2) array
+    return np.vstack((two_theta_deg, chi_deg))
 
 
 def compute_rotation_matrix(points, hkls, B_matrix):
@@ -125,7 +150,7 @@ def compute_rotation_matrix(points, hkls, B_matrix):
     
     first_rotation_matrix = rotation_matrix_about_axis(first_axis, rot_angle1 / DEG)
     
-    new_points = [convert_direction_to_angle(np.dot(first_rotation_matrix, np.dot(B_matrix, hkl))) for hkl in hkls]
+    new_points = convert_direction_to_angle(first_rotation_matrix@B_matrix@np.array(hkls).T)    
     angular_difference = compute_angular_distance2(np.array(new_points), points)
     index = np.argmin(angular_difference[1:]) + 1
     hkl2 = hkls[index]

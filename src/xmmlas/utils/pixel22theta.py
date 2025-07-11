@@ -23,6 +23,9 @@ def convert_pixel_to_theta_chi_XMAS(x_pix, y_pix, camera_dim, camera_size, sampl
     Returns:
         tuple: (two_theta_deg, chi_deg) angles in degrees.
     """
+    # compensate for XMAS coordinates starting from 1
+    x_pix = np.array(x_pix) + 1
+    y_pix = np.array(y_pix) + 1
     # Convert camera dimensions and size to numpy arrays
     camera_dim_pix = np.array(camera_dim)    # (width, height) in pixels
     camera_size_mm = np.array(camera_size)     # (width, height) in mm
@@ -78,6 +81,10 @@ def convert_pixel_to_theta_chi_XMAS2(x_pix, y_pix, camera_dim, camera_size, samp
     Returns:
         tuple: (two_theta_deg, chi_deg) angles in degrees.
     """
+    # compensate for XMAS coordinates starting from 1
+    x_pix = np.array(x_pix) + 1
+    y_pix = np.array(y_pix) + 1
+    # Convert camera dimensions and size to numpy arrays    
     camera_dim_pix = np.array(camera_dim)
     camera_size_mm = np.array(camera_size)
     center_channel_pix = np.array(center_channel)
@@ -142,19 +149,17 @@ def convert_pixel_to_theta_chi_XMAS2(x_pix, y_pix, camera_dim, camera_size, samp
     
     return two_theta_deg, chi_deg
 
+if __name__ == "__main__":
+    # Example test for convert_pixel_to_theta_chi_XMAS
+    x = 0  # x position in pixels
+    y = 0   # y position in pixels
+    camera_dim = (1043, 981)
+    camera_size = (179, 168.387)
+    sample_detector_distance = 151.127  # in mm
+    center_channel = (527.082, 198.386)  # in pixels
+    tilt = (0, -0.238460, 0.597850)  # (roll, pitch, yaw) in degrees
+    
+    two_theta, chi = convert_pixel_to_theta_chi_XMAS(x, y, camera_dim, camera_size, sample_detector_distance, center_channel, tilt)
+    print("2θ angle:", two_theta)
+    print("chi angle:", chi)
 
-# Test code (commented out):
-"""
-# Example test for convert_pixel_to_theta_chi_XMAS
-x = 1043  # x position in pixels
-y = 981   # y position in pixels
-camera_dim = (1043, 981)
-camera_size = (179, 168.387)
-sample_detector_distance = 151.094  # in mm
-center_channel = (528.471, 198.304)
-tilt = (0, -0.281, 0.592)  # tilt: (roll, pitch, yaw) in degrees
-
-two_theta, chi = convert_pixel_to_theta_chi_XMAS(x, y, camera_dim, camera_size, sample_detector_distance, center_channel, tilt)
-print("2θ angle:", two_theta)
-print("chi angle:", chi)
-"""

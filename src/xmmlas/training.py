@@ -183,9 +183,9 @@ if __name__ == "__main__":
     # -------------------------------------------------------------------------
     # Configuration Section
     # -------------------------------------------------------------------------
-    key_materials = ["BaTiO3"]           # Material(s) to analyze
+    key_materials = ["PZT"]           # Material(s) to analyze
     syms = [Symmetry.cubic]         # Corresponding symmetry groups
-    max_hkl = 8                          # Maximum allowed hkl value for filtering
+    max_hkl = 6                          # Maximum allowed hkl value for filtering
     nb_patterns_train = 200              # Number of training patterns to generate
     nb_patterns_valid = 20               # Number of validation patterns to generate
     valid_flag = True                   # Indicates whether the generated patterns are for validation

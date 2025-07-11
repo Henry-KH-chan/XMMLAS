@@ -21,9 +21,6 @@ test_env/
 .DS_Store
 Thumbs.db
 
-# Local environment configuration
-environment.yaml
-
 # Log files
 pip-log.txt
 pip-delete-this-directory.txt

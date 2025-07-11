@@ -46,17 +46,21 @@ symmetry = Symmetry.cubic
 # Input and output paths for raw and processed data respectively.
 input_path = os.path.join("..", "..", "data", "raw", "BaTiO3")
 output_path = os.path.join("..", "..", "data", "processed", "BaTiO3")
-
 # Parameters for Laue image processing and indexing:
 MIN_DISTANCE = 3         # Minimum distance for peak detection in find_local_maxima
-THRESHOLD_MUL = 5        # Multiplier for thresholding in peak detection
+THRESHOLD_MUL = 8        # Multiplier for thresholding in peak detection
 TOLERANCE_PARAM = 0.15   # Tolerance parameter for LauePatternIndexer
 MIN_NODES = 5            # Minimum nodes for identifying significant HKL pairs
 INITIAL_NUM_PTS = 20     # Initial number of points for indexing process
 INCREMENT = 10           # Increment step for the indexing process
 EARLY_EXIT_NUM = 50      # Early exit parameter for indexing process
-num_indexing_attempts = 10  # Number of indexing attempts to perform
-
+num_indexing_attempts = 1  # Number of indexing attempts to perform
+# Geometry
+camera_dim = (1043, 981)
+camera_size = (179,168.387)
+sample_detector_distance = 151.127  # Sample-detector distance in mm
+center_channel = (527.082, 198.386)  # Center channel position in pixels
+tilt = (0, -0.238460, 0.597850)  # Tilt of detector (roll, pitch, yaw) in degrees
 # Ensure the output directory exists.
 os.makedirs(output_path, exist_ok=True)
 
@@ -118,7 +122,7 @@ def process_file(file):
         print(f"Processing file: {file}")
         
         # Load the Laue image with the provided mask.
-        laue_image = LaueImage(os.path.join(input_path, file), mask)
+        laue_image = LaueImage(os.path.join(input_path, file), mask, camera_dimensions = camera_dim, detector_pixel_sizes = camera_size, sample_detector_distance = sample_detector_distance, beam_center = center_channel, detector_tilt = tilt)
         
         # Find local maxima and convert pixel coordinates to (2θ, χ) angles.
         laue_image.find_local_maxima(min_distance=MIN_DISTANCE, threshold_mul=THRESHOLD_MUL)

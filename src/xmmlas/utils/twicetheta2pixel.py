@@ -66,23 +66,27 @@ def twothetachi_to_pixel_XMAS(twothetachi, camera_dim, camera_size, sample_detec
     # Convert distances in mm to pixel coordinates relative to the center of the detector.
     x_pix = x_mm_detector / pixel_size[0] + center_channel_pix[0]
     y_pix = y_mm_detector / pixel_size[1] + center_channel_pix[1]
+    
+    # compensate for XMAS coordinates starting from 1
+    x_pix = x_pix - 1
+    y_pix = y_pix - 1
+    
     return x_pix, y_pix
 
-"""
-# Example test code:
-x = 1  # Example pixel value (you might want to provide a full array if testing multiple points)
-y = 1  # Example pixel value
-two_theta = 100.57063588339366
-chi = 30.995433433044862
-camera_dim = (1043, 981)
-camera_size = (179, 168.387)
-sample_detector_distance = 151.094  # in mm
-center_channel = (528.471, 198.304)  # in pixels
-tilt = (0, -0.281, 0.592)  # (roll, pitch, yaw) in degrees
-
-# Construct a test input: For a single point, twothetachi should be a 2D array.
-twothetachi_test = np.array([[two_theta, chi]])
-x_pix, y_pix = twothetachi_to_pixel_XMAS(twothetachi_test, camera_dim, camera_size, sample_detector_distance, center_channel, tilt)
-print("x_pix:", x_pix)
-print("y_pix:", y_pix)
-"""
+if __name__ == "__main__":
+    # Example test code:
+    x = 1  # Example pixel value (you might want to provide a full array if testing multiple points)
+    y = 1  # Example pixel value
+    two_theta = 100.5796
+    chi = 30.9287
+    camera_dim = (1043, 981)
+    camera_size = (179, 168.387)
+    sample_detector_distance = 151.127  # in mm
+    center_channel = (527.082, 198.386)  # in pixels
+    tilt = (0, -0.238460, 0.597850)  # (roll, pitch, yaw) in degrees
+    
+    # Construct a test input: For a single point, twothetachi should be a 2D array.
+    twothetachi_test = np.array([[two_theta, chi]])
+    x_pix, y_pix = twothetachi_to_pixel_XMAS(twothetachi_test, camera_dim, camera_size, sample_detector_distance, center_channel, tilt)
+    print("x_pix:", x_pix)
+    print("y_pix:", y_pix)

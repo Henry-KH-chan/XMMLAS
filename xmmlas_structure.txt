@@ -1,4 +1,4 @@
-xnnkas/
+xnnlas/
 ├── README.md
 ├── LICENSE
 ├── .gitignore
@@ -11,7 +11,7 @@ xnnkas/
 │   └── external/
 ├── notebooks/
 ├── src/
-│   └── xnnkas/
+│   └── xmmlas/
 │       ├── __init__.py
 │       ├── training.py
 │       ├── process.py
